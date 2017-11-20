@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.ActionLink("Gerenciar Categorias", "GerenciarCategorias", "Categoria", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Gerenciar Estabelecimentos", "GerenciarEstabelecimentos", "Estabelecimento", null, new { @class = "btn btn-default" })
+    </div>
+</div>

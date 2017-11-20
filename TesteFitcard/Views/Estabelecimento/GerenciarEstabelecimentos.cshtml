@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TesteFitcard.Models.Estabelecimento.EstabelecimentoModel>
+
+@{
+    ViewBag.Title = "GerenciarEstabelecimentos";
+}
+
+<h2>Gerenciar Estabelecimentos</h2>
+
+<p>
+    @Html.ActionLink("Adicionar Estabelecimento", "AdicionarEstabelecimento")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EstabelecimentoId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RazaoSocial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeFantasia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CNPJ)
+        </th>   
+        <th>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstabelecimentoId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categoria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RazaoSocial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeFantasia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CNPJ)
+        </td>    
+        <td>
+            @Html.DisplayFor(modelItem => item.DataCadastro)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Editar", "EditarEstabelecimento", new { estabelecimentoId = item.EstabelecimentoId }) |
+            @Html.ActionLink("Visualizar", "VisualizarEstabelecimento", new { estabelecimentoId = item.EstabelecimentoId }) |
+            @Html.ActionLink("Excluir", "ExcluirEstabelecimento", new { estabelecimentoId = item.EstabelecimentoId })
+        </td>
+    </tr>
+}
+
+</table>

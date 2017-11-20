@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TesteFitcard.Models.Categoria.CategoriaModel>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>Gerenciar Categorias</h2>
+
+<p>
+    @Html.ActionLink("Adicionar Categoria", "AdicionarCategoria")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Descrição
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "EditarCategoria", new { categoriaId=item.CategoriaId }) |
+                @Html.ActionLink("Visualizar", "VisualizarCategoria", new { categoriaId = item.CategoriaId }) |
+                @Html.ActionLink("Excluir", "ExcluirCategoria", new { categoriaId = item.CategoriaId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
