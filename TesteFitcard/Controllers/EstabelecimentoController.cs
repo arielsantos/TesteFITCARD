@@ -38,7 +38,7 @@ namespace TesteFitcard.Controllers
                     //  Descricao = Estabelecimento.Descricao
                 });
             });
-
+          
             return View(listEstabelecimentoModel);
         }
 
@@ -80,6 +80,7 @@ namespace TesteFitcard.Controllers
             };
 
             new EstabelecimentoRepository().Add(Estabelecimento);
+            this.AddNotification("Estabelecimento incluido com sucesso", NotificationType.SUCCESS);
 
 
             return RedirectToAction("GerenciarEstabelecimentos");
@@ -116,6 +117,17 @@ namespace TesteFitcard.Controllers
         [HttpPost]
         public ActionResult EditarEstabelecimento(EditarEstabelecimentoModel editarEstabelecimento)
         {
+            if (editarEstabelecimento.CategoriaId == 1 && String.IsNullOrEmpty(editarEstabelecimento.Telefone))
+            {
+                ModelState.AddModelError(string.Empty, "Telefone obrigatório para supermercados");
+
+                editarEstabelecimento.Categorias = new SelectList(new CategoriaRepository().GetCategorias(), "CategoriaId", "Descricao");
+
+
+                return View(editarEstabelecimento);
+            }
+
+
             Estabelecimento Estabelecimento = new Estabelecimento()
             {
                 EstabelecimentoId = editarEstabelecimento.EstabelecimentoId,
@@ -134,6 +146,8 @@ namespace TesteFitcard.Controllers
 
 
             new EstabelecimentoRepository().Edit(Estabelecimento);
+            this.AddNotification("Estabelecimento editado com sucesso", NotificationType.SUCCESS);
+
 
 
             return RedirectToAction("GerenciarEstabelecimentos");
@@ -168,7 +182,7 @@ namespace TesteFitcard.Controllers
         {
             new EstabelecimentoRepository().Remove(estabelecimentoId);
             //ModelState.AddModelError(string.Empty, "Student Name already exists.");
-            this.AddNotification("Estabelecimento excluida com sucesso", NotificationType.SUCCESS);
+            this.AddNotification("Estabelecimento excluido com sucesso", NotificationType.SUCCESS);
 
 
             return RedirectToAction("GerenciarEstabelecimentos");
